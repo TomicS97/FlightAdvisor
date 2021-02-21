@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="FlightAdvisorAPI.View.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightAdvisorAPI.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="540" d:DesignWidth="1000">
+    <Grid>
+        <TabControl HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="972" Margin="10,10,0,0" Grid.ColumnSpan="2">
+            <TabItem Header="Add City" Width="200">
+
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/images/Srdjan_FlightAdvisor.jpg" AlignmentX="Left" AlignmentY="Top" Stretch="UniformToFill"  />
+                    </Grid.Background>
+                    <Label FontWeight="Bold" Content="City name:" HorizontalAlignment="Left" Margin="92,58,0,0" VerticalAlignment="Top" Height="25" Width="107"/>
+                    <Label FontWeight="Bold" Content="Country name:" HorizontalAlignment="Left" Margin="92,88,0,0" VerticalAlignment="Top" Height="25" Width="107"/>
+                    <Label FontWeight="Bold" Content="Description:" HorizontalAlignment="Left" Margin="92,143,0,0" VerticalAlignment="Top" Height="25" Width="107"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="241,58,0,0" TextWrapping="Wrap" Text="{Binding CityName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="241,88,0,0" TextWrapping="Wrap" Text="{Binding CountryName, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="222" Grid.ColumnSpan="2"/>
+                    <TextBox Opacity="0.6" HorizontalAlignment="Left" Height="198" Margin="241,143,0,0" TextWrapping="Wrap" Text="{Binding DescriptCity, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="335" RenderTransformOrigin="0.658,0.506" Grid.ColumnSpan="2"/>
+                    <Button IsDefault="True" Content="Add city" HorizontalAlignment="Left" Margin="213,382,0,0" VerticalAlignment="Top" Width="85" Height="28" Command="{Binding AddCity , UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                    <Button Content="Log Out" HorizontalAlignment="Left" Margin="584,10,0,0" VerticalAlignment="Top" Width="85" Height="28" Click="Button_Click" Command="{Binding Logout , UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ImportData" Width="200">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush AlignmentX="Left" AlignmentY="Top" Stretch="Fill"  />
+                    </Grid.Background>
+                    <Border Background="GhostWhite" Opacity="0.7" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="178" Margin="59,63,0,0" VerticalAlignment="Top" Width="320"/>
+                    <Border Background="GhostWhite" Opacity="0.7" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="178" Margin="564,63,0,0" VerticalAlignment="Top" Width="320"/>
+                    <Label Background="LightGray" FontWeight="Bold" Content="Import airports file: " HorizontalAlignment="Left" Margin="90,98,0,0" VerticalAlignment="Top" Width="167"/>
+                    <Label Background="LightGray" FontWeight="Bold" Content="Import routes file: " HorizontalAlignment="Left" Margin="574,98,0,0" VerticalAlignment="Top" Width="167"/>
+                    <TextBox Name="RoutesFileRoute" HorizontalAlignment="Left" Height="26" Margin="574,147,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="291"/>
+                    <Button Command="{Binding Browse , UpdateSourceTrigger=PropertyChanged}" Name="airportBrowseButton" Content="Browse.." HorizontalAlignment="Left" Margin="285,98,0,0" VerticalAlignment="Top" Width="75" Height="26"/>
+                    <Button Command="{Binding Browse2 , UpdateSourceTrigger=PropertyChanged}" Name="routesBrowseButton" Content="Browse.." HorizontalAlignment="Left" Margin="790,98,0,0" VerticalAlignment="Top" Width="75" Height="26"/>
+                    <Button x:Name="airportBrowseButton_Confirm" Content="Import" HorizontalAlignment="Left" Margin="285,196,0,0" VerticalAlignment="Top" Width="75" Height="26"/>
+                    <Button x:Name="routesBrowseButton_Confirm" Content="Import" HorizontalAlignment="Left" Margin="790,196,0,0" VerticalAlignment="Top" Width="75" Height="26"/>
+                    <Button Name="HomepageButton" Content="Log Out" HorizontalAlignment="Left" Margin="868,10,0,0" VerticalAlignment="Top" Width="79" Height="26" Click="HomepageButton_Click" Command="{Binding Logout , UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox HorizontalAlignment="Left" Margin="90,147,0,0" TextWrapping="Wrap" Text="{Binding IspisPutanje,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="26" Width="270"/>
+
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

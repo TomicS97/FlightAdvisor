@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="FlightAdvisorAPI.View.Regular"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlightAdvisorAPI.View"
+        xmlns:viewmodel="clr-namespace:FlightAdvisorAPI.ViewModel"
+        mc:Ignorable="d"
+        Height="540" Width="1000">
+
+    <Grid Background="White">
+        <TabControl HorizontalAlignment="Left" Height="490" VerticalAlignment="Top" Width="972" Margin="10,10,0,0" Grid.ColumnSpan="2">
+            <!--Get all the cities (all the comments should be returned, or if specified, only the x latest comments).
+                Search for cities by name (all the comments should be returned, or if specified, only the x latest comments).
+                -->
+            <TabItem Header="All Cities" Width="200">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/images/Srdjan_FlightAdvisor.jpg" AlignmentX="Left" AlignmentY="Top" Stretch="UniformToFill"  />
+                    </Grid.Background>
+                    <TextBox  HorizontalAlignment="Left" Height="26" Margin="116,10,0,0" TextWrapping="Wrap" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="252"/>
+                    <Label FontWeight="Bold" Content="Search city:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                    <DataGrid IsReadOnly="True" ColumnWidth="*" Opacity="0.8" Name="AllCitiesgrid" ItemsSource="{Binding CitiesList,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Selected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="354" Margin="10,94,0,0" VerticalAlignment="Top" Width="588">
+                        <DataGrid.Resources>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Margin" Value="1"/>
+                            </Style>
+                        </DataGrid.Resources>
+                        <!--<DataGrid.Columns>
+                            <DataGridTextColumn Header="City" Binding="{Binding Path='Citi'}" Width="*"/>
+                            <DataGridTextColumn Header="Country" Binding="{Binding Path='Country'}" Width="*"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Path='Description'}" Width="*"/>
+                        </DataGrid.Columns>-->
+
+                    </DataGrid>
+                    <DataGrid IsReadOnly="True" ColumnWidth="*" ItemsSource="{Binding CommentList,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCom,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Opacity="0.8" Name="Commentgrid" HorizontalAlignment="Left" Height="321" Margin="603,94,0,0" VerticalAlignment="Top" Width="349">
+                        <!--<DataGrid.Columns>
+                            <DataGridTextColumn Header="Comment" Binding="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Created" Binding="{Binding Created, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Modified" Binding="{Binding Modified, UpdateSourceTrigger=PropertyChanged}" Width="*" IsReadOnly="True">
+                            </DataGridTextColumn>
+                        </DataGrid.Columns> -->
+                    </DataGrid>
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="694,420,0,0" VerticalAlignment="Top" Width="75" Height="28" Command="{Binding AddComment , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Edit" HorizontalAlignment="Left" Margin="785,420,0,0" VerticalAlignment="Top" Width="75" Height="28" Command="{Binding EditComment , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="877,420,0,0" VerticalAlignment="Top" Width="75" Height="28" Command="{Binding DeleteComment , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Log Out" HorizontalAlignment="Left" Margin="862,10,0,0" VerticalAlignment="Top" Width="90" Height="26" Command="{Binding LogOutt , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Show All" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="75" Height="26" Command="{Binding ShowAllCity , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Search" HorizontalAlignment="Left" Margin="430,10,0,0" VerticalAlignment="Top" Width="75" Height="26" Command="{Binding SearchCity , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="View" HorizontalAlignment="Left" Margin="603,420,0,0" VerticalAlignment="Top" Width="75" Height="28" Command="{Binding WholeComment, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Book your flight" Width="200">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush AlignmentX="Left" AlignmentY="Top" Stretch="Fill"  />
+                    </Grid.Background>
+                    <DataGrid  IsReadOnly="True" ColumnWidth="*" Opacity="0.8" HorizontalAlignment="Left" Height="353" Margin="10,95,0,0" VerticalAlignment="Top" Width="805" ItemsSource="{Binding FlightList,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedFlight,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        
+                    </DataGrid>
+                    <Label FontWeight="Bold" Content="Flying from: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <Label FontWeight="Bold" Content="Flying to: " HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="97,10,0,0" TextWrapping="Wrap" Text="{Binding FlFrom, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="306"/>
+                    <TextBox HorizontalAlignment="Left" Height="26" Margin="97,64,0,0" TextWrapping="Wrap" Text="{Binding FlTo, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="306"/>
+                    <Button IsDefault="True" Content="Search" HorizontalAlignment="Left" Margin="563,64,0,0" VerticalAlignment="Top" Width="111" Height="26" Command="{Binding ShowFlight , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Log Out" HorizontalAlignment="Left" Margin="862,10,0,0" VerticalAlignment="Top" Width="90" Height="26" Command="{Binding LogOutt , UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Book Now!" HorizontalAlignment="Left" Margin="837,389,0,0" VerticalAlignment="Top" Width="97" Height="31"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
